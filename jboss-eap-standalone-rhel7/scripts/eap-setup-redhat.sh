@@ -40,12 +40,6 @@ echo 'WILDFLY_OPTS="-Djboss.bind.address.management=0.0.0.0"' >> ${EAP_RPM_CONF_
 echo "Installing GIT" >> /home/$1/install.progress.txt
 yum install -y git >> /home/$1/install.out.txt 2>&1
 
-cd /home/$1
-echo "Getting the sample dukes app to install" >> /home/$1/install.progress.txt
-git clone https://github.com/MyriamFentanes/dukes.git >> /home/$1/install.out.txt 2>&1
-mv /home/$1/dukes/target/dukes.war $EAP_HOME/standalone/deployments/dukes.war
-cat > $EAP_HOME/standalone/deployments/dukes.war.dodeploy
-
 echo "Configuring EAP managment user" >> /home/$1/install.progress.txt
 $EAP_HOME/bin/add-user.sh -u $EAP_USER -p $EAP_PASSWORD -g 'guest,mgmtgroup'
 
